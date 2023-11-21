@@ -3,6 +3,7 @@ package com.security.Spring.Security.security.config;
 import com.security.Spring.Security.security.filter.ProjectAuthorizationFilter;
 import com.security.Spring.Security.security.util.ProjectAuthenticationEntryPoint;
 import com.security.Spring.Security.security.util.WhiteList;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,7 @@ import static org.springframework.http.HttpMethod.DELETE;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@AllArgsConstructor
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
     private final ProjectAuthorizationFilter authorizationFilter;

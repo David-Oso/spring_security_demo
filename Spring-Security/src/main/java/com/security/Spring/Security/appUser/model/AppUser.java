@@ -27,6 +27,6 @@ public class AppUser {
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean isEnabled = false;
-    @OneToMany(mappedBy = "app_user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Token> tokens;
 }
