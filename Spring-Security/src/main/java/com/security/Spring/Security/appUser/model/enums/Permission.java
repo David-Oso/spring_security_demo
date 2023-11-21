@@ -1,4 +1,4 @@
-package com.security.Spring.Security.appUser.enums;
+package com.security.Spring.Security.appUser.model.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

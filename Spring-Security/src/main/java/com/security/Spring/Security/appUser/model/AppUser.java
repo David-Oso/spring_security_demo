@@ -1,12 +1,12 @@
-package com.security.Spring.Security.appUser;
+package com.security.Spring.Security.appUser.model;
 
-import com.security.Spring.Security.appUser.enums.Role;
+import com.security.Spring.Security.appUser.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import token.Token;
+import com.security.Spring.Security.security.token.Token;
 
 import java.util.List;
 
@@ -26,6 +26,7 @@ public class AppUser {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private boolean isEnabled = false;
     @OneToMany(mappedBy = "app_user")
     private List<Token> tokens;
 }

@@ -1,6 +1,6 @@
 package com.security.Spring.Security.appUser.service;
 
-import com.security.Spring.Security.appUser.AppUser;
+import com.security.Spring.Security.appUser.model.AppUser;
 import com.security.Spring.Security.appUser.dto.request.ChangePasswordRequest;
 import com.security.Spring.Security.appUser.dto.response.ChangePasswordResponse;
 import com.security.Spring.Security.appUser.repository.AppUserRepository;

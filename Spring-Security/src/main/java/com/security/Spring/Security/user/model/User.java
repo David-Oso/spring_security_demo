@@ -1,6 +1,6 @@
-package token;
+package com.security.Spring.Security.user.model;
 
-import com.security.Spring.Security.appUser.AppUser;
+import com.security.Spring.Security.appUser.model.AppUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,17 +10,14 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
-public class Token {
+@Getter
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true)
-    private String token;
-    private boolean isRevoked;
-    private boolean isExpired;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AppUser appUser;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 }
