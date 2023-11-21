@@ -1,4 +1,4 @@
-package com.security.Spring.Security.user.request;
+package com.security.Spring.Security.appUser.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

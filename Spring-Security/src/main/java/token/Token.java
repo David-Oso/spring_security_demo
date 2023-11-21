@@ -1,6 +1,6 @@
 package token;
 
-import com.security.Spring.Security.user.User;
+import com.security.Spring.Security.appUser.AppUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,5 +22,5 @@ public class Token {
     private boolean isExpired;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private AppUser appUser;
 }

@@ -1,4 +1,4 @@
-package com.security.Spring.Security.user.enums;
+package com.security.Spring.Security.appUser.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.security.Spring.Security.user.enums.Permission.*;
+import static com.security.Spring.Security.appUser.enums.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {

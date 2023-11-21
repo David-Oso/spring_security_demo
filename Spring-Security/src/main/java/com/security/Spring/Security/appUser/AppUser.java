@@ -1,6 +1,6 @@
-package com.security.Spring.Security.user;
+package com.security.Spring.Security.appUser;
 
-import com.security.Spring.Security.user.enums.Role;
+import com.security.Spring.Security.appUser.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "_user")
-public class User {
+@Table(name = "app_user")
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,7 +26,6 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "app_user")
     private List<Token> tokens;
-
 }
