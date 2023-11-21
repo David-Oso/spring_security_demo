@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {
     @Query(value = """
-        select t from Token  t inner join  AppUser  apuser
-        on t.appUser.id = apuser.id
-        where  apuser.id = :id and (t.isExpired = false or t.isRevoked = false )
+        select t from Token  t inner join  AppUser  appuser
+        on t.appUser.id = appuser.id
+        where  appuser.id = :id and (t.isExpired = false or t.isRevoked = false )
         """)
-    List<Token> finalAllValidTokenByUser(Integer id);
+    List<Token> findAllValidTokenByUser(Integer id);
     Optional<Token> findByAccessToken(String accessToken);
 }
