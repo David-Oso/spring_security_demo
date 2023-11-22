@@ -9,7 +9,7 @@ import com.security.Spring.Security.appUser.repository.AppUserRepository;
 import com.security.Spring.Security.security.services.JwtService;
 import com.security.Spring.Security.security.token.Token;
 import com.security.Spring.Security.security.token.TokenRepository;
-import com.security.Spring.Security.user.model.User;
+import com.security.Spring.Security.security.user.SecuredUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,8 @@ public class AppUserServiceImpl implements AppUserService {
     private final TokenRepository tokenRepository;
     @Override
     public ChangePasswordResponse changePassword(ChangePasswordRequest request, Principal connectedUser) {
-        AppUser appUser = (AppUser) ((UsernamePasswordAuthenticationToken)connectedUser).getPrincipal();
+        SecuredUser securedUser = (SecuredUser) ((UsernamePasswordAuthenticationToken)connectedUser).getPrincipal();
+        AppUser appUser = securedUser.getAppUser();
         checkIfCurrentPasswordIsCorrect(request.getCurrentPassword(), appUser.getPassword());
         checkIfTwoPasswordAreTheSame(request.getNewPassword(), request.getConfirmPassword());
         appUser.setPassword(passwordEncoder.encode(request.getNewPassword()));

@@ -19,10 +19,10 @@ import jakarta.servlet.http.HttpServletRequest;
                         url = ""
                 ),
                 description = "OpenApi documentation for Spring Security Demo",
-                title = "OpenApi specification - Sprint Security Demo",
+                title = "OpenApi Specification - Spring Security Demo",
                 version = "1.0",
                 license = @License(
-                        name = "Licence name",
+                        name = "License name",
                         url = "https://some-url.com"
                 ),
                 termsOfService = "Terms of service"

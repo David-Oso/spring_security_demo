@@ -1,6 +1,8 @@
 package com.security.Spring.Security.security.services;
 
+import com.security.Spring.Security.appUser.model.AppUser;
 import com.security.Spring.Security.security.token.TokenRepository;
+import com.security.Spring.Security.security.user.SecuredUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
@@ -25,7 +29,9 @@ public class LogoutService implements LogoutHandler {
         var storedToken = tokenRepository.findByAccessToken(jwt)
                 .orElse(null);
         if(storedToken != null){
-            tokenRepository.delete(storedToken);
+            AppUser appUser = storedToken.getAppUser();
+            var tokens = tokenRepository.findAllByAppUser_Id(appUser.getId());
+            tokenRepository.deleteAll(tokens);
 //            storedToken.setExpired(true);
 //            storedToken.setRevoked(true);
 //            tokenRepository.save(storedToken);
