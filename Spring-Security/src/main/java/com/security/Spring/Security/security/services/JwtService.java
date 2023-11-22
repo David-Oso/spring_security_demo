@@ -12,6 +12,7 @@ import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 @Component
@@ -41,16 +42,12 @@ public class JwtService {
                 .getBody();
     }
 
-    public String generateAccessToken(String email){
-        return generateToken(new HashMap<>(), email);
-    }
-
-    private String generateToken(HashMap<String, Object> claims, String email) {
+    public String generateAccessToken(HashMap<String, Object> claims, String email){
         return buildJwtToken(claims, email, accessExpiration);
     }
 
-    public String generateRefreshToken(String email){
-        return buildJwtToken(new HashMap<>(), email, refreshExpiration);
+    public String generateRefreshToken(HashMap<String, Object> claims, String email){
+        return buildJwtToken(claims, email, refreshExpiration);
     }
 
     private String buildJwtToken(HashMap<String, Object> claims, String email, long expiration) {

@@ -38,11 +38,11 @@ public class AdminServiceImpl implements AdminService {
 
             adminRepository.save(admin);
 
-            JwtResponse jwtResponse = appUserService.generateJwtToken(appUser);
-            log.info("""
-                    %n::::::::::::::::::: Admin Access Token -> %s :::::::::::::::::::
-                    ::::::::::::::::::: Admin Refresh Token -> %s :::::::::::::::::::
-                    %n""".formatted(jwtResponse.getAccessToken(), jwtResponse.getRefreshToken()));
+//            JwtResponse jwtResponse = appUserService.generateJwtToken(appUser);
+//            log.info("""
+//                    %n::::::::::::::::::: Admin Access Token -> %s :::::::::::::::::::
+//                    ::::::::::::::::::: Admin Refresh Token -> %s :::::::::::::::::::
+//                    %n""".formatted(jwtResponse.getAccessToken(), jwtResponse.getRefreshToken()));
         }
     }
     @Override

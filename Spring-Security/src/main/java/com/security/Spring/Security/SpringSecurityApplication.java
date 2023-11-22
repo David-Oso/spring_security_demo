@@ -25,13 +25,14 @@ public class SpringSecurityApplication {
 			adminLoginRequest.setEmail("admin@Gmail.com");
 			adminLoginRequest.setPassword("Password123$");
 			AdminLoginResponse adminLoginResponse = adminService.adminLogin(adminLoginRequest);
-			System.out.println("::::::::::::Admin Access Token-> "+adminLoginResponse.getJwtResponse().getAccessToken());
 
 			ManagerLoginRequest managerLoginRequest = new ManagerLoginRequest();
 			managerLoginRequest.setEmail("manager@gmail.com");
 			managerLoginRequest.setPassword("Password123$");
 			ManagerLoginResponse managerLoginResponse = managerService.managerLogin(managerLoginRequest);
-			System.out.println("::::::::::::Manager Access Token-> "+managerLoginResponse.getJwtResponse().getAccessToken());
+
+			System.out.printf("%n%n::::::::::::Admin Access Token-> %s%n%n",adminLoginResponse.getJwtResponse().getAccessToken());
+			System.out.printf("::::::::::::Manager Access Token-> %s%n%n",managerLoginResponse.getJwtResponse().getAccessToken());
 		};
 	}
 }

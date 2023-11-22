@@ -38,11 +38,11 @@ public class ManagerServiceImpl implements ManagerService{
 
             managerRepository.save(manager);
 
-            JwtResponse jwtResponse = appUserService.generateJwtToken(appUser);
-            log.info("""
-                    %n::::::::::::::::::: Manager Access Token -> %s :::::::::::::::::::
-                    ::::::::::::::::::: Manager Refresh Token -> %s :::::::::::::::::::
-                    %n""".formatted(jwtResponse.getAccessToken(), jwtResponse.getRefreshToken()));
+//            JwtResponse jwtResponse = appUserService.generateJwtToken(appUser);
+//            log.info("""
+//                    %n::::::::::::::::::: Manager Access Token -> %s :::::::::::::::::::
+//                    ::::::::::::::::::: Manager Refresh Token -> %s :::::::::::::::::::
+//                    %n""".formatted(jwtResponse.getAccessToken(), jwtResponse.getRefreshToken()));
         }
     }
     @Override

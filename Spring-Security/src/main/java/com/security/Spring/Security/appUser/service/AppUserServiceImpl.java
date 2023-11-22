@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -57,16 +58,34 @@ public class AppUserServiceImpl implements AppUserService {
             throw new BadCredentialsException("Password are not the same");
     }
 
+
+//            SuperAdmin foundSuperAdmin = findByEmail(email);
+//            Claims.put("role", foundSuperAdmin.getRole());
+//           Claims.put("list of permissions", foundSuperAdmin.getListOfPermissions().stream().toList());
+//            new SecuredSuperAdmin(findByEmail(email)).getAuthorities().forEach(claims -> Claims.put("claims", claims));
+//            AdminResponse adminResponse = new AdminResponse();
+//            adminResponse.setProfilePicture(foundSuperAdmin.getProfilePictureLink());
+//
     @Override
     public JwtResponse generateJwtToken(AppUser appUser) {
         final String email = appUser.getEmail();
-        final String accessToken = jwtService.generateAccessToken(email);
-        final String refreshToken = jwtService.generateRefreshToken(email);
+        HashMap<String, Object> claims = getClaims(appUser);
+        final String accessToken = jwtService.generateAccessToken(claims, email);
+        final String refreshToken = jwtService.generateRefreshToken(claims, email);
         saveToken(appUser, accessToken, refreshToken);
         return JwtResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    private static HashMap<String, Object> getClaims(AppUser appUser) {
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("role", appUser.getRole());
+        claims.put("list of permissions", appUser.getRole().getPermissions().stream().toList());
+        SecuredUser securedUser = new SecuredUser(appUser);
+        securedUser.getAuthorities().forEach(claim -> claims.put("claims", claim));
+        return claims;
     }
 
     private void saveToken(AppUser appUser, String accessToken, String refreshToken) {
@@ -118,7 +137,8 @@ public class AppUserServiceImpl implements AppUserService {
         if(userEmail != null){
             AppUser appUser = getAppUserByEmail(userEmail);
             if(jwtService.isValidToken(refreshToken, userEmail)){
-                String accessToken = jwtService.generateAccessToken(userEmail);
+                HashMap<String, Object> claims = getClaims(appUser);
+                String accessToken = jwtService.generateAccessToken(claims, userEmail);
                 revokeAllUserTokens(appUser);
                 saveToken(appUser, accessToken, refreshToken);
                 var jwtResponse = JwtResponse.builder()
