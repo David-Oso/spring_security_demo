@@ -11,6 +11,7 @@ import com.security.Spring.Security.appUser.service.AppUserService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class AdminServiceImpl implements AdminService {
     private final AppUserService  appUserService;
     private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
     private void createManager(){
@@ -27,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
             appUser.setFirstName("Admin");
             appUser.setLastName("Admin");
             appUser.setEmail("admin@gmail.com");
-            appUser.setPassword("Password123$");
+            appUser.setPassword(passwordEncoder.encode("Password123$"));
             appUser.setEnabled(true);
             appUser.setRole(Role.ADMIN);
 

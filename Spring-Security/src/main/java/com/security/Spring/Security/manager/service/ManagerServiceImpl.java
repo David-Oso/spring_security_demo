@@ -11,6 +11,7 @@ import com.security.Spring.Security.manager.repository.ManagerRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class ManagerServiceImpl implements ManagerService{
     private final AppUserService  appUserService;
     private final ManagerRepository managerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
     private void createManager(){
@@ -27,7 +29,7 @@ public class ManagerServiceImpl implements ManagerService{
             appUser.setFirstName("Manager");
             appUser.setLastName("Manager");
             appUser.setEmail("manager@gmail.com");
-            appUser.setPassword("Password123$");
+            appUser.setPassword(passwordEncoder.encode("Password123$"));
             appUser.setEnabled(true);
             appUser.setRole(Role.MANAGER);
 
